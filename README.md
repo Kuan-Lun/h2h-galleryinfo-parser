@@ -25,7 +25,7 @@ pip install h2h-galleryinfo-parser
 Here's a quick example of how to use H@H Gallery Parser:
 
 ```python
-from h2h-galleryinfo-parser import parse_gid, parse_galleryinfo
+from h2h_galleryinfo_parser import parse_gid, parse_galleryinfo
 
 # Parse gallery ID from folder path
 gallery_id = parse_gid('/path/to/gallery/folder')
