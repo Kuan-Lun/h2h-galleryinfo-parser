@@ -23,12 +23,12 @@ class GalleryInfoParser:
         gallery_name (str): The name of the gallery.
         gid (int): The gallery ID.
         files_path (list[str]): The paths of the files in the gallery.
-        modified_time (str): The modified time of the gallery.
+        modified_time (datetime.datetime): The modified time of the gallery.
         title (str): The title of the gallery.
-        upload_time (str): The upload time of the gallery.
+        upload_time (datetime.datetime): The upload time of the gallery.
         galleries_comments (str): The uploader's comment for the gallery.
         upload_account (str): The account used to upload the gallery.
-        download_time (str): The download time of the gallery.
+        download_time (datetime.datetime): The download time of the gallery.
         tags (dict[str, str]): The tags associated with the gallery.
         pages (int): The number of pages in the gallery.
     """
@@ -54,12 +54,12 @@ class GalleryInfoParser:
         gallery_name: str,
         gid: int,
         files_path: list[str],
-        modified_time: str,
+        modified_time: datetime.datetime,
         title: str,
-        upload_time: str,
+        upload_time: datetime.datetime,
         galleries_comments: str,
         upload_account: str,
-        download_time: str,
+        download_time: datetime.datetime,
         tags: list[tuple[str, str]],
     ) -> None:
         self.gallery_folder = gallery_folder
@@ -123,9 +123,7 @@ def parse_galleryinfo(gallery_folder: str) -> GalleryInfoParser:
     gallery_name = os.path.basename(gallery_folder)
     gid = parse_gid(gallery_folder)
     files_path = os.listdir(gallery_folder)
-    modified_time = datetime.datetime.fromtimestamp(
-        os.path.getmtime(gallery_info_path)
-    ).strftime("%Y-%m-%d %H:%M:%S")
+    modified_time = datetime.datetime.fromtimestamp(os.path.getmtime(gallery_info_path))
 
     comments = False
     comment_lines = list()
@@ -158,11 +156,11 @@ def parse_galleryinfo(gallery_folder: str) -> GalleryInfoParser:
                 case "Title":
                     title = value
                 case "Upload Time":
-                    upload_time = value
+                    upload_time = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M")
                 case "Uploaded By":
                     upload_account = value
                 case "Downloaded":
-                    download_time = value
+                    download_time = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M")
 
     galleries_comments = "\n".join(comment_lines).strip("\n")
 
