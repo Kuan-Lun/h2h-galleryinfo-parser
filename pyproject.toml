@@ -22,7 +22,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/Kuan-Lun/h2h-galleryinfo-parser"
 Source = "https://github.com/Kuan-Lun/h2h-galleryinfo-parser"
-Tracker = "https://github.com/Kuan-Lun/h2h-galleryinfo-parser"
+Tracker = "https://github.com/Kuan-Lun/h2h-galleryinfo-parser/issues"
 
 [tool.setuptools]
 packages = ["h2h_galleryinfo_parser"]
