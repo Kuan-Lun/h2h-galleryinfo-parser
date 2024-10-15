@@ -1,6 +1,6 @@
 # H@H Gallery Parser (h2h-galleryinfo-parser)
 
-H@H Gallery Parser is a Python package designed to parse downloaded gallery files from H@H (Hentai@Home), a gallery download tool. When H@H downloads a gallery, it creates a folder named after the gallery, containing image files and a `galleryinfo.txt` file. This package helps extract useful information from the `galleryinfo.txt` file for further use.
+H@H Gallery Parser is a Python package designed to parse downloaded gallery files from H@H, a gallery download tool. When H@H downloads a gallery, it creates a folder named after the gallery, containing image files and a `galleryinfo.txt` file. This package helps extract useful information from the `galleryinfo.txt` file for further use.
 
 ## Features
 
