@@ -48,9 +48,9 @@ class GalleryURLParser:
     @url.setter
     def url(self, url: str) -> None:
         if url != "":
-            self.url = url
             if ("exhentai.org" not in self.url) and ("e-hentai.org" not in self.url):
                 raise ValueError("The url is not the gallery's url.")
+            self.url = url
 
             if "exhentai.org" in self.url:
                 match = re.search(
@@ -65,3 +65,5 @@ class GalleryURLParser:
                 self.url_key = match.group(2)
             else:
                 raise ValueError("The url is not the gallery's url.")
+        else:
+            raise ValueError("The url cannot be empty.")
