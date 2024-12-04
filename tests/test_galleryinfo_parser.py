@@ -1,14 +1,11 @@
-import unittest
 import datetime
 import os
-import random, string
+import random
 import shutil
+import string
+import unittest
 
-from src.galleryinfo_parser.galleryinfo_parser import (
-    parse_gid,
-    parse_galleryinfo,
-    GalleryInfoParser,
-)
+from src.galleryinfo_parser.galleryinfo_parser import parse_galleryinfo
 
 
 def random_string(length: int) -> str:
