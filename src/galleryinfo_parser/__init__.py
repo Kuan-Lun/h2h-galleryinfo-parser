@@ -1,6 +1,4 @@
 __all__ = [
-    "__version__",
-    "__version_info__",
     "parse_gid",
     "parse_galleryinfo",
     "GalleryInfoParser",
