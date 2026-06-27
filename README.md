@@ -28,13 +28,13 @@ Here's a quick example of how to use H@H Gallery Parser:
 from h2h_galleryinfo_parser import parse_gid, parse_galleryinfo
 
 # Parse gallery ID from folder path
-gallery_id = parse_gid('/path/to/gallery/folder')
-print(f'Gallery ID: {gallery_id}')
+gallery_id = parse_gid("/path/to/gallery/folder")
+print(f"Gallery ID: {gallery_id}")
 
 # Parse gallery information
-gallery_info = parse_galleryinfo('/path/to/gallery/folder')
-print(f'Gallery Title: {gallery_info.title}')
-print(f'Tags: {gallery_info.tags}')
+gallery_info = parse_galleryinfo("/path/to/gallery/folder")
+print(f"Gallery Title: {gallery_info.title}")
+print(f"Tags: {gallery_info.tags}")
 ```
 
 ## License
