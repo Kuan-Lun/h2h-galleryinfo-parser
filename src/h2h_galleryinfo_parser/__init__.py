@@ -6,5 +6,5 @@ __all__ = [
 ]
 
 
-from .galleryinfo_parser import parse_gid, parse_galleryinfo, GalleryInfoParser
 from .gallery_url_parser import GalleryURLParser
+from .galleryinfo_parser import GalleryInfoParser, parse_galleryinfo, parse_gid

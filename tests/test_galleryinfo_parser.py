@@ -5,7 +5,7 @@ import shutil
 import string
 import unittest
 
-from src.galleryinfo_parser.galleryinfo_parser import parse_galleryinfo
+from src.h2h_galleryinfo_parser.galleryinfo_parser import parse_galleryinfo
 
 
 def random_string(length: int) -> str:
@@ -21,7 +21,7 @@ class TestGalleryInfoParser(unittest.TestCase):
         if tags == "":
             raise ValueError("tags cannot be empty")
 
-        elements = dict[str, str]()
+        elements: dict[str, str] = {}
         elements["Title"] = random_string(10)
         elements["Upload Time"] = "2007-04-13 03:43"
         elements["Uploaded By"] = random_string(10)
