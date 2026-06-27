@@ -40,7 +40,7 @@ class TestGalleryInfoParser(unittest.TestCase):
         gidpair: tuple[str, int],
         tagspair: tuple[str, list[tuple[str, str]]],
         withcomments: bool,
-    ):
+    ) -> None:
         """
         gidpair: (gallery_folder, gid)
         tagspair: (tags, tags_answer)
@@ -71,12 +71,19 @@ class TestGalleryInfoParser(unittest.TestCase):
         self.assertEqual(gallery.gid, gid)
         self.assertEqual(gallery.files_path, ["galleryinfo.txt"])
         self.assertEqual(
-            gallery.modified_time, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            gallery.modified_time.strftime("%Y-%m-%d %H:%M:%S"),
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         )
         self.assertEqual(gallery.title, answer_element["Title"])
-        self.assertEqual(gallery.upload_time, answer_element["Upload Time"])
+        self.assertEqual(
+            gallery.upload_time,
+            datetime.datetime.strptime(answer_element["Upload Time"], "%Y-%m-%d %H:%M"),
+        )
         self.assertEqual(gallery.upload_account, answer_element["Uploaded By"])
-        self.assertEqual(gallery.download_time, answer_element["Downloaded"])
+        self.assertEqual(
+            gallery.download_time,
+            datetime.datetime.strptime(answer_element["Downloaded"], "%Y-%m-%d %H:%M"),
+        )
         if withcomments:
             self.assertEqual(
                 gallery.galleries_comments, answer_element["Uploader's Comments"][1:-1]
@@ -85,7 +92,7 @@ class TestGalleryInfoParser(unittest.TestCase):
             self.assertEqual(gallery.galleries_comments, "")
         self.assertEqual(gallery.tags, tags_answer)
 
-    def test_gid(self):
+    def test_gid(self) -> None:
         tagspair = ("tag1:value1", [("tag1", "value1")])
         self._assert_galleryinfo(("1", 1), tagspair, False)
         self._assert_galleryinfo(("[1] [3]", 3), tagspair, False)
@@ -93,7 +100,7 @@ class TestGalleryInfoParser(unittest.TestCase):
         self._assert_galleryinfo(("[1 [3]", 3), tagspair, False)
         self._assert_galleryinfo(("1] [3]", 3), tagspair, False)
 
-    def test_tags(self):
+    def test_tags(self) -> None:
         gidpair = ("1", 1)
         self._assert_galleryinfo(gidpair, ("tag1:value1", [("tag1", "value1")]), False)
         self._assert_galleryinfo(
@@ -113,7 +120,7 @@ class TestGalleryInfoParser(unittest.TestCase):
             False,
         )
 
-    def test_comments(self):
+    def test_comments(self) -> None:
         gidpair = ("1", 1)
         tagspair = ("tag1:value1", [("tag1", "value1")])
         self._assert_galleryinfo(gidpair, tagspair, False)

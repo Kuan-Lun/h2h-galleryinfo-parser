@@ -5,7 +5,7 @@ import datetime
 import os
 
 
-def count_files_in_directory(directory_path) -> int:
+def count_files_in_directory(directory_path: str) -> int:
     return len(
         [
             f
