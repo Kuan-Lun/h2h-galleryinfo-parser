@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `h2h-galleryinfo-parser` is a small Python library (published to PyPI as `h2h-galleryinfo-parser`, imported as `h2h_galleryinfo_parser`) that parses `galleryinfo.txt` metadata files produced by H@H (Hentai@Home Downloader). It also includes a parser for exhentai.org / e-hentai.org gallery URLs. There is no CLI or service — this is a library only.
 
+Built with `hatchling`. Source lives under `src/h2h_galleryinfo_parser/`, matching the installed import name exactly — there's no `package-dir` remap, which is intentional: hatchling's editable installs (`pip install -e`) refuse a `sources` mapping that renames a prefix rather than removing it, so the source directory name and the distribution's import name must match.
+
 ## Build & Development Commands
 
 ```bash
@@ -35,8 +37,8 @@ Two independent parsers are exported from `__init__.py`: `galleryinfo_parser.py`
 
 Gotchas that aren't obvious from a quick read:
 
-- Installed package name (`h2h_galleryinfo_parser`) differs from the source directory (`src/galleryinfo_parser/`) via the `package-dir` remap in `pyproject.toml`. Internal code/tests import via `src.galleryinfo_parser...`; external/doc examples use `h2h_galleryinfo_parser`.
-- `GalleryInfoParser.tags` is `list[tuple[str, str]]`, not the `dict[str, str]` its docstring claims.
+- Internal code/tests import via `src.h2h_galleryinfo_parser...` (see `tests/test_galleryinfo_parser.py`); external/doc examples use the installed name `h2h_galleryinfo_parser` directly.
+- `GalleryInfoParser.tags` is the `GalleryTags` alias for `list[tuple[str, str]]`, not the `dict[str, str]` its docstring claims.
 - Comment parsing in `parse_galleryinfo` ends at a hardcoded sentinel line (the H@H downloader's footer string), not at EOF or a blank line — a format change in that footer would silently break comment extraction.
 
 ## Coding Guidelines
