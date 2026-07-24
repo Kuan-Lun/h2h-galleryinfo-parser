@@ -1,9 +1,9 @@
 import datetime
-import os
 import random
 import shutil
 import string
 import unittest
+from pathlib import Path
 
 from src.h2h_galleryinfo_parser.galleryinfo_parser import parse_galleryinfo
 
@@ -52,24 +52,23 @@ class TestGalleryInfoParser(unittest.TestCase):
         tags = tagspair[0]
         tags_answer = tagspair[1]
 
-        dir_path = os.path.join(os.path.dirname(__file__), gallery_folder)
-        if os.path.exists("dir_path"):
+        dir_path = Path(__file__).parent / gallery_folder
+        if dir_path.exists():
             raise FileExistsError(f"{dir_path} already exists")
-        os.mkdir(dir_path)
+        dir_path.mkdir()
 
         answer_element, txt = self._generate_galleryinfo(
             tags=tags, withcomments=withcomments
         )
-        galleryinfo_path = os.path.join(dir_path, "galleryinfo.txt")
-        with open(galleryinfo_path, "w") as file:
-            file.write(txt)
+        galleryinfo_path = dir_path / "galleryinfo.txt"
+        galleryinfo_path.write_text(txt)
 
         gallery = parse_galleryinfo(dir_path)
         shutil.rmtree(dir_path)
 
         self.assertEqual(gallery.gallery_name, gallery_folder)
         self.assertEqual(gallery.gid, gid)
-        self.assertEqual(gallery.files_path, ["galleryinfo.txt"])
+        self.assertEqual(gallery.files_path, [galleryinfo_path])
         self.assertEqual(
             gallery.modified_time.strftime("%Y-%m-%d %H:%M:%S"),
             datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
