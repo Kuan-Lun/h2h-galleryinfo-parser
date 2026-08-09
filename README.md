@@ -8,7 +8,7 @@ The package provides three core functionalities:
 
 1. **Parse Gallery ID**: Extract the gallery ID from a given gallery folder.
 
-2. **Gallery Information Parsing**: The `GalleryInfoParser` class represents a parser for extracting detailed gallery information, including the gallery name, ID, paths of files, modification time, title, upload and download times, comments, uploader account, tags, and the number of pages.
+2. **Gallery Information Parsing**: The `GalleryInfoParser` class represents a parser for extracting detailed gallery information, including the gallery name, ID, modification time, title, upload and download times, comments, uploader account, tags, and the number of pages. File paths are not retained; the page count is computed lazily with a constant-memory directory pass.
 
 3. **Parse Gallery Information**: Extracts all relevant details from the given folder and returns an instance of `GalleryInfoParser` containing the parsed information.
 

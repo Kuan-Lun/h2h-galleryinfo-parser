@@ -68,7 +68,6 @@ class TestGalleryInfoParser(unittest.TestCase):
 
         self.assertEqual(gallery.gallery_name, gallery_folder)
         self.assertEqual(gallery.gid, gid)
-        self.assertEqual(gallery.files_path, [galleryinfo_path])
         self.assertEqual(
             gallery.modified_time.strftime("%Y-%m-%d %H:%M:%S"),
             datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -124,3 +123,22 @@ class TestGalleryInfoParser(unittest.TestCase):
         tagspair = ("tag1:value1", [("tag1", "value1")])
         self._assert_galleryinfo(gidpair, tagspair, False)
         self._assert_galleryinfo(gidpair, tagspair, True)
+
+    def test_pages_counts_direct_files_without_exposing_a_materialized_path_list(
+        self,
+    ) -> None:
+        gallery_folder = Path(__file__).parent / "42"
+        gallery_folder.mkdir()
+        try:
+            _elements, text = self._generate_galleryinfo("language:english")
+            (gallery_folder / "galleryinfo.txt").write_text(text)
+            (gallery_folder / "001.jpg").write_bytes(b"one")
+            (gallery_folder / "002.jpg").write_bytes(b"two")
+            (gallery_folder / "nested").mkdir()
+
+            gallery = parse_galleryinfo(gallery_folder)
+
+            self.assertEqual(gallery.pages, 2)
+            self.assertFalse(hasattr(gallery, "files_path"))
+        finally:
+            shutil.rmtree(gallery_folder)

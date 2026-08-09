@@ -9,7 +9,9 @@ type GalleryTags = list[tuple[str, str]]
 
 
 def count_files_in_directory(directory_path: Path) -> int:
-    return len([f for f in directory_path.iterdir() if f.is_file()])
+    """Count direct regular files without retaining every path in memory."""
+
+    return sum(1 for path in directory_path.iterdir() if path.is_file())
 
 
 @dataclass(slots=True)
@@ -21,7 +23,6 @@ class GalleryInfoParser:
         gallery_folder (Path): The path to the gallery folder.
         gallery_name (str): The name of the gallery.
         gid (int): The gallery ID.
-        files_path (list[Path]): The paths of the files in the gallery.
         modified_time (datetime.datetime): The modified time of the gallery.
         title (str): The title of the gallery.
         upload_time (datetime.datetime): The upload time of the gallery.
@@ -35,7 +36,6 @@ class GalleryInfoParser:
     gallery_folder: Path
     gallery_name: str
     gid: int
-    files_path: list[Path]
     modified_time: datetime.datetime
     title: str
     upload_time: datetime.datetime
@@ -88,7 +88,6 @@ def parse_galleryinfo(gallery_folder: Path) -> GalleryInfoParser:
 
     gallery_name = gallery_folder.name
     gid = parse_gid(gallery_folder)
-    files_path = list(gallery_folder.iterdir())
     modified_time = datetime.datetime.fromtimestamp(gallery_info_path.stat().st_mtime)
 
     comments = False
@@ -134,7 +133,6 @@ def parse_galleryinfo(gallery_folder: Path) -> GalleryInfoParser:
         gallery_folder=gallery_folder,
         gallery_name=gallery_name,
         gid=gid,
-        files_path=files_path,
         modified_time=modified_time,
         title=title,
         upload_time=upload_time,
