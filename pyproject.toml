@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.32.0"]
 build-backend = "hatchling.build"
 
 [project]
@@ -20,7 +20,12 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-dev = ["black", "ruff", "mypy", "pymarkdownlnt"]
+dev = [
+    "black>=26.5.1",
+    "ruff>=0.16.3",
+    "mypy>=2.3.0",
+    "pymarkdownlnt>=0.9.39",
+]
 
 [project.urls]
 Homepage = "https://github.com/Kuan-Lun/h2h-galleryinfo-parser"
