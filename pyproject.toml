@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "h2h-galleryinfo-parser"
-version = "0.5.1"
+version = "0.5.2"
 description = "A simple H@H GalleryInfo Parser"
 readme = "README.md"
 authors = [{ name = "Kuan-Lun Wang" }]
@@ -22,8 +22,8 @@ classifiers = [
 [project.optional-dependencies]
 dev = [
     "black>=26.5.1",
-    "ruff>=0.16.3",
-    "mypy>=2.3.0",
+    "ruff>=0.16.4",
+    "mypy>=2.3.1",
     "pymarkdownlnt>=0.9.39",
 ]
 
