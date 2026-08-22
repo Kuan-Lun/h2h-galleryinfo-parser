@@ -8,6 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Built with `hatchling`. Source lives under `src/h2h_galleryinfo_parser/`, matching the installed import name exactly — there's no `package-dir` remap, which is intentional: hatchling's editable installs (`pip install -e`) refuse a `sources` mapping that renames a prefix rather than removing it, so the source directory name and the distribution's import name must match.
 
+## Git Workflow
+
+- Do not create or switch to a development branch.
+- Perform all development work directly on the repository's primary branch (`master`).
+
 ## Build & Development Commands
 
 ```bash
