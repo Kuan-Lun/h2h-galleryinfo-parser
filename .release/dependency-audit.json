@@ -1,0 +1,83 @@
+{
+  "checked_at": "2026-08-26T08:01:56+00:00",
+  "manifest_sha256": "8d3a80ffa42f3c352753306e75a3962f59342bf128e144fd3d7604c02f34edfc",
+  "node": [
+    {
+      "declared": ">=0.18.1",
+      "latest": "0.23.2",
+      "latest_satisfies": true,
+      "name": "markdownlint-cli2"
+    }
+  ],
+  "project_version": "0.5.4",
+  "python": [
+    {
+      "declared": "hatchling>=1.32.0",
+      "group": "build",
+      "latest": "1.32.0",
+      "latest_satisfies": true,
+      "name": "hatchling",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/hatchling/"
+    },
+    {
+      "declared": "build>=1.3.0",
+      "group": "optional:dev",
+      "latest": "1.5.0",
+      "latest_satisfies": true,
+      "name": "build",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/build/"
+    },
+    {
+      "declared": "hatchling>=1.32.0",
+      "group": "optional:dev",
+      "latest": "1.32.0",
+      "latest_satisfies": true,
+      "name": "hatchling",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/hatchling/"
+    },
+    {
+      "declared": "mypy>=2.3.1",
+      "group": "optional:dev",
+      "latest": "2.3.1",
+      "latest_satisfies": true,
+      "name": "mypy",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/mypy/"
+    },
+    {
+      "declared": "packaging>=26.0",
+      "group": "optional:dev",
+      "latest": "26.3",
+      "latest_satisfies": true,
+      "name": "packaging",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/packaging/"
+    },
+    {
+      "declared": "pytest>=9.0.2",
+      "group": "optional:dev",
+      "latest": "9.1.1",
+      "latest_satisfies": true,
+      "name": "pytest",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/pytest/"
+    },
+    {
+      "declared": "ruff>=0.16.4",
+      "group": "optional:dev",
+      "latest": "0.16.4",
+      "latest_satisfies": true,
+      "name": "ruff",
+      "python_3_14": true,
+      "url": "https://pypi.org/project/ruff/"
+    }
+  ],
+  "review": {
+    "note": "All direct registry candidates, including versions outside declared ranges, were reviewed; current latest versions satisfy the declarations and passed the clean rebuild, strict checks, tests, build, and wheel smoke.",
+    "status": "reviewed"
+  },
+  "schema": "h2h.dependency-audit.v1"
+}
