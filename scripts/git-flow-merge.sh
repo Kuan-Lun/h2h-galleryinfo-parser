@@ -83,7 +83,7 @@ else
 fi
 
 if ! WORKFLOW_MERGE_TASK_REF="$task_branch" \
-    git -C "$merge_worktree" merge --no-ff "$task_branch"; then
+    git -C "$merge_worktree" merge --no-ff --no-edit "$task_branch"; then
     abort_merge_if_needed "$merge_worktree"
     if [[ "$merge_worktree" == "$repository_root" ]]; then
         git -C "$repository_root" switch "$task_branch" || true
