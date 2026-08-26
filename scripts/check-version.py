@@ -8,6 +8,7 @@ import copy
 import fnmatch
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -142,12 +143,17 @@ def main() -> int:
     arguments = parser.parse_args()
 
     if arguments.index:
-        merge_head = Path(_git("rev-parse", "--git-path", "MERGE_HEAD"))
-        if not merge_head.exists():
-            raise ValueError("--index requires an active merge")
+        task_ref = os.environ.get("WORKFLOW_MERGE_TASK_REF")
+        if not task_ref:
+            merge_head = Path(_git("rev-parse", "--git-path", "MERGE_HEAD"))
+            if merge_head.exists():
+                task_ref = _git("rev-parse", "MERGE_HEAD")
+        if not task_ref:
+            raise ValueError("--index requires WORKFLOW_MERGE_TASK_REF")
+        _git("rev-parse", "--verify", task_ref)
         base_tree = "HEAD"
         candidate_tree = _git("write-tree")
-        message_range = f"HEAD..{_git('rev-parse', 'MERGE_HEAD')}"
+        message_range = f"HEAD..{task_ref}"
     else:
         detector = Path("scripts/detect-primary-branch.sh")
         primary_name = subprocess.run(
