@@ -1,17 +1,12 @@
 import datetime
-import random
+import os
 import shutil
-import string
 import unittest
 from pathlib import Path
 
-from src.h2h_galleryinfo_parser.galleryinfo_parser import parse_galleryinfo
+from h2h_galleryinfo_parser.galleryinfo_parser import parse_galleryinfo
 
-
-def random_string(length: int) -> str:
-    return "".join(
-        random.choice(string.ascii_letters + string.digits) for x in range(length)
-    )
+FIXED_MODIFICATION_TIMESTAMP = 1_700_000_000
 
 
 class TestGalleryInfoParser(unittest.TestCase):
@@ -22,13 +17,13 @@ class TestGalleryInfoParser(unittest.TestCase):
             raise ValueError("tags cannot be empty")
 
         elements: dict[str, str] = {}
-        elements["Title"] = random_string(10)
+        elements["Title"] = "Deterministic Gallery Title"
         elements["Upload Time"] = "2007-04-13 03:43"
-        elements["Uploaded By"] = random_string(10)
+        elements["Uploaded By"] = "deterministic-uploader"
         elements["Downloaded"] = "2007-08-13 03:43"
         elements["Tags"] = tags
         if withcomments:
-            elements["Uploader's Comments"] = "\n" + random_string(10) + "\n"
+            elements["Uploader's Comments"] = "\nDeterministic uploader comment\n"
         end = "Downloaded from E-Hentai Galleries by the Hentai@Home Downloader <3\n"
 
         return elements, "\n".join(
@@ -62,6 +57,10 @@ class TestGalleryInfoParser(unittest.TestCase):
         )
         galleryinfo_path = dir_path / "galleryinfo.txt"
         galleryinfo_path.write_text(txt)
+        os.utime(
+            galleryinfo_path,
+            (FIXED_MODIFICATION_TIMESTAMP, FIXED_MODIFICATION_TIMESTAMP),
+        )
 
         gallery = parse_galleryinfo(dir_path)
         shutil.rmtree(dir_path)
@@ -69,8 +68,8 @@ class TestGalleryInfoParser(unittest.TestCase):
         self.assertEqual(gallery.gallery_name, gallery_folder)
         self.assertEqual(gallery.gid, gid)
         self.assertEqual(
-            gallery.modified_time.strftime("%Y-%m-%d %H:%M:%S"),
-            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            gallery.modified_time,
+            datetime.datetime.fromtimestamp(FIXED_MODIFICATION_TIMESTAMP),
         )
         self.assertEqual(gallery.title, answer_element["Title"])
         self.assertEqual(

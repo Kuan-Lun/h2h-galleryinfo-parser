@@ -1,6 +1,8 @@
 # H@H Gallery Parser (h2h-galleryinfo-parser)
 
-H@H Gallery Parser is a Python package designed to parse downloaded gallery files from H@H, a gallery download tool. When H@H downloads a gallery, it creates a folder named after the gallery, containing image files and a `galleryinfo.txt` file. This package helps extract useful information from the `galleryinfo.txt` file for further use.
+H@H Gallery Parser parses galleries downloaded by H@H. Each downloaded gallery
+is a folder containing image files and a `galleryinfo.txt` file; this package
+extracts that metadata for further use.
 
 ## Features
 
@@ -8,9 +10,13 @@ The package provides three core functionalities:
 
 1. **Parse Gallery ID**: Extract the gallery ID from a given gallery folder.
 
-2. **Gallery Information Parsing**: The `GalleryInfoParser` class represents a parser for extracting detailed gallery information, including the gallery name, ID, modification time, title, upload and download times, comments, uploader account, tags, and the number of pages. File paths are not retained; the page count is computed lazily with a constant-memory directory pass.
+2. **Gallery Information Parsing**: `GalleryInfoParser` extracts the gallery
+   name, ID, modification time, title, upload and download times, comments,
+   uploader account, tags, and page count. It does not retain file paths, and
+   computes the page count with a constant-memory directory pass.
 
-3. **Parse Gallery Information**: Extracts all relevant details from the given folder and returns an instance of `GalleryInfoParser` containing the parsed information.
+3. **Parse Gallery Information**: Extract all relevant folder details as a
+   `GalleryInfoParser` instance.
 
 ## Installation
 
@@ -41,4 +47,5 @@ print(f"Tags: {gallery_info.tags}")
 
 ## License
 
-This project is distributed under the terms of the GNU General Public Licence (GPL). For detailed licence terms, see the `LICENSE` file included in this distribution.
+This project is distributed under the terms of the GNU General Public License
+version 3 (GPLv3). See the included `LICENSE` file for the complete terms.

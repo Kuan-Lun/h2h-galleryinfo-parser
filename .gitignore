@@ -14,8 +14,15 @@ tmp
 !.vscode/**
 !.claude/
 !.claude/**
+!/.githooks/
+!.githooks/**
+!/.markdownlint-cli2.jsonc
+!/.release/
+!.release/**
 
 uv.lock
+package-lock.json
+node_modules/
 
 # macOS
 .DS_Store

@@ -1,4 +1,4 @@
-__all__ = ["parse_gid", "parse_galleryinfo", "GalleryInfoParser"]
+__all__ = ["GalleryInfoParser", "parse_galleryinfo", "parse_gid"]
 
 
 import datetime
