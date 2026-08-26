@@ -1,8 +1,8 @@
 __all__ = [
-    "parse_gid",
-    "parse_galleryinfo",
     "GalleryInfoParser",
     "GalleryURLParser",
+    "parse_galleryinfo",
+    "parse_gid",
 ]
 
 
