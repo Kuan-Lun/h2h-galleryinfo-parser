@@ -29,6 +29,7 @@ _IGNORED_PATHS = (
     "CLAUDE.md",
     "README.md",
     "docs/**",
+    "mypy.ini",
     "package.json",
     "scripts/**",
     "tests/**",
